@@ -14,13 +14,13 @@ def show_orders_by_client(request, client_id):
 def show_orders_by_period(request, client_id):
     client = get_object_or_404(Client, pk=client_id)
     start_date = timezone.now() - timedelta(days=7)
-    week = set(Product.objects.filter(order__client_id=client_id, order__date_of_creation__gte=start_date) \
-               .distinct().order_by('-date_of_creation'))
+    week = Product.objects.filter(order__client_id=client_id, order__date_of_creation__gte=start_date) \
+                                  .distinct()
     start_date = timezone.now() - timedelta(days=30)
-    month = set(Product.objects.filter(order__client_id=client_id, order__date_of_creation__gte=start_date) \
-                .distinct().order_by('-date_of_creation'))
+    month = Product.objects.filter(order__client_id=client_id, order__date_of_creation__gte=start_date) \
+        .distinct()
     start_date = timezone.now() - timedelta(days=365)
-    year = set(Product.objects.filter(order__client_id=client_id, order__date_of_creation__gte=start_date) \
-               .distinct().order_by('-date_of_creation'))
+    year = Product.objects.filter(order__client_id=client_id, order__date_of_creation__gte=start_date) \
+        .distinct()
     return render(request, 'shop_app/orders_by_data.html',
                   {'client': client, 'week': week, 'month': month, 'year': year})

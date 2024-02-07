@@ -4,16 +4,45 @@
 <h2>Уникальные товара из заказов клиента: {{ client.name }} за периоды:</h2>
 <h3>За неделю</h3>
 <table border="1">
-    <tr><td>product name</td><td>qts</td><td>price</td></tr>
+    <tr>
+        <td>product name</td>
+        <td>price</td>
+    </tr>
     {% for product in week %}
     <tr>
         <td> {{ product.title }}</td>
-                <td> {{ product.qts }}</td>
+
         <td> {{ product.price }}</td>
     </tr>
-        {% endfor %}
+    {% endfor %}
+</table>
+    <h3>За месяц</h3>
+<table border="1">
+    <tr>
+        <td>product name</td>
+        <td>price</td>
+    </tr>
+    {% for product in month %}
+    <tr>
+        <td> {{ product.title }}</td>
 
-{% endfor %}
+        <td> {{ product.price }}</td>
+    </tr>
+    {% endfor %}
+</table>
+    <h3>За год</h3>
+<table border="1">
+    <tr>
+        <td>product name</td>
+        <td>price</td>
+    </tr>
+    {% for product in year %}
+    <tr>
+        <td> {{ product.title }}</td>
+
+        <td> {{ product.price }}</td>
+    </tr>
+    {% endfor %}
 
 
 </table>
