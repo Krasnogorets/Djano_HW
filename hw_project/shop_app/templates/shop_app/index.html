@@ -1,0 +1,25 @@
+{% extends 'shop_app/base.html' %}
+{% block title %}{{ client.name }} заказы{% endblock %}
+{% block content %}
+<h2>Последние {{ num }} заказов клиента: {{ client.name }}</h2>
+<table border="1">
+    {% for order in orders %}
+    <tr> <td width="100px"> Order: {{ order.id }}</td>
+        <td width="300px">Date of Creation: {{ order.date_of_creation }}</td>
+        <td width="100px">Sum: {{ order.sum }}</td></tr>
+      <tr><td>qts</td><td>product name</td><td>price</td></tr>
+        {% for product in order.products.all %}
+
+    <tr>
+                <td> {{ product.qts }}</td>
+        <td> {{ product.title }}</td>
+
+        <td> {{ product.price }}</td>
+    </tr>
+        {% endfor %}
+
+{% endfor %}
+
+
+</table>
+{% endblock %}
