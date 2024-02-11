@@ -1,0 +1,24 @@
+{% extends 'shop_app/base.html' %}
+
+{% block content %}
+
+<table border="1">
+    <tr><td  width="200px"><p>Название</p></td>
+      <td align="center" width="400px"><p>Описание</p></td>
+        <td align="center" width="200px"><p>цена</p></td>
+        <td align="center" width="150px"><p>количество</p></td>
+      <td align="center" width="200px"><p>картинка</p></td>
+      <td align="center" width="200px"><p>дата обновления</p></td>
+    </tr>
+    {% for product in products %}
+    <tr><td><p>{{ product.title }}</p></td>
+        <td align="center"><p>{{ product.description }}</p></td>
+        <td align="center"><p>{{ product.price }}</p></td>
+        <td align="center"><p>{{ product.qts }}</p></td>
+        <td align="center"><img src="/media/{{ product.picture }}" width="100px"> </td>
+        <td align="center"><p>{{ product.update_date }}</p></td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
