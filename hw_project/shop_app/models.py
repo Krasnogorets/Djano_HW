@@ -25,6 +25,7 @@
 
 *Допишите несколько функций CRUD для работы с моделями по желанию. Что по вашему мнению актуально в такой базе данных.
 """
+import datetime
 
 from django.db import models
 
@@ -42,13 +43,14 @@ class Client(models.Model):
 
 class Product(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(default=0)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
-    qts = models.IntegerField(default=0)
-    update_date = models.DateTimeField(auto_now_add=True)
+    qts = models.IntegerField(default=1)
+    picture = models.ImageField(null=True,blank=True,upload_to="product_img/")
+    update_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.title}, {self.price}, {self.qts} '
+        return f'{self.title}, {self.price}, {self.qts}, {self.picture} '
 
 
 class Order(models.Model):
@@ -56,7 +58,6 @@ class Order(models.Model):
     products = models.ManyToManyField(Product)
     sum = models.DecimalField(default=0, decimal_places=2, max_digits=9)
     date_of_creation = models.DateTimeField(auto_now_add=True)
-
 
     def __str__(self):
         return f'{self.client}, {self.products}, {self.sum} '
