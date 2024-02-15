@@ -10,7 +10,15 @@ class ClientAdmin(admin.ModelAdmin):
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['title', 'price', 'qts', 'update_date']
+    @admin.display(boolean=True)
+    def has_image(self, product: Product) -> bool:
+        return bool(product.picture)
+
+    list_display = ['title', 'price', 'qts', 'update_date', 'has_image']
+
+
+
+
     ordering = ['-update_date']
     readonly_fields = ['update_date', 'picture_view']
 
