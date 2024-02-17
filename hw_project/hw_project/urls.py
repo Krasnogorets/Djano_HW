@@ -26,5 +26,7 @@ urlpatterns = [
     path('', include('hw1_app.urls')),
     path('shop/', include('shop_app.urls')),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
 
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

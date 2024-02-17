@@ -15,7 +15,7 @@
         <td align="center"><p>{{ product.description }}</p></td>
         <td align="center"><p>{{ product.price }}</p></td>
         <td align="center"><p>{{ product.qts }}</p></td>
-        <td align="center"><img src="/media/{{ product.picture }}" width="100px"> </td>
+        <td align="center"><img src="{{ product.picture.url }}" width="100px"> </td>
         <td align="center"><p>{{ product.update_date }}</p></td>
     </tr>
     {% endfor %}

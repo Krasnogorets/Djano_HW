@@ -28,6 +28,7 @@
 import datetime
 
 from django.db import models
+from django.utils.html import format_html
 
 
 class Client(models.Model):
@@ -38,7 +39,7 @@ class Client(models.Model):
     reg_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.name}, {self.email}, {self.phone} '
+        return f'{self.name}'
 
 
 class Product(models.Model):
@@ -46,11 +47,14 @@ class Product(models.Model):
     description = models.TextField(default=0)
     price = models.DecimalField(default=0, decimal_places=2, max_digits=6)
     qts = models.IntegerField(default=1)
-    picture = models.ImageField(null=True,blank=True,upload_to="product_img/")
+    picture = models.ImageField(null=True, blank=True, upload_to="product_img/")
     update_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.title}, {self.price}, {self.qts}, {self.picture} '
+        return f'{self.title}, {self.price} '
+
+    def picture_view(self):
+        return format_html('<img src="{}" style="max-width:100px; max-height:100px"/>'.format(self.picture.url))
 
 
 class Order(models.Model):
@@ -60,14 +64,8 @@ class Order(models.Model):
     date_of_creation = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.client}, {self.products}, {self.sum} '
+        return f'{self.client}, {self.sum} '
 
-    # def save(self, *args, **kwargs):
-    #     total_sum = 0
-    #     for product in self.products.all():
-    #         total_sum += product.price * product.qts
-    #     self.sum = total_sum
-    #     super().save(*args, **kwargs)
     def calculate_sum(self):
         total_sum = 0
         for product in self.products.all():
