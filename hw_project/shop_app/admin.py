@@ -16,9 +16,6 @@ class ProductAdmin(admin.ModelAdmin):
 
     list_display = ['title', 'price', 'qts', 'update_date', 'has_image']
 
-
-
-
     ordering = ['-update_date']
     readonly_fields = ['update_date', 'picture_view']
 
@@ -71,12 +68,19 @@ def sum_update(modeladmin, request, queryset):
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ['client', 'sum', 'date_of_creation']
+    list_display = ['display_id', 'sum', 'date_of_creation']
     ordering = ['-date_of_creation']
-    readonly_fields = ['date_of_creation']
+    readonly_fields = ['date_of_creation', 'display_id']
     list_filter = ['client', 'date_of_creation']
     actions = [sum_update]
     fieldsets = [
+        (
+            'заказ',
+            {
+                'classes': ['wide'],
+                'fields': ['display_id'],
+            },
+        ),
         (
             'продукты',
             {
@@ -97,7 +101,7 @@ class OrderAdmin(admin.ModelAdmin):
                 'fields': ['sum']
             }
         ),
-                (
+        (
             'публикация',
             {
                 'fields': ['date_of_creation'],
@@ -105,6 +109,10 @@ class OrderAdmin(admin.ModelAdmin):
         ),
     ]
 
+    def display_id(self, obj):
+        return f"Заказ №{obj.id}"
+
+    display_id.short_description = 'Номер заказа'
 
 
 admin.site.register(Client, ClientAdmin)
