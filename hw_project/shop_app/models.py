@@ -54,7 +54,7 @@ class Product(models.Model):
         return f'{self.title}, {self.price} '
 
     def picture_view(self):
-        return format_html('<img src="{}" style="max-width:100px; max-height:100px"/>'.format(self.picture.url))
+        return format_html('<img src="{}" style="max-width:100px; max-height:100px"/ alt="Изображения нет">'.format(self.picture.url))
 
 
 class Order(models.Model):

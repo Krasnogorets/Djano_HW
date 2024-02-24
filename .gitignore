@@ -8,7 +8,7 @@
 *.pyc
 __pycache__/
 local_settings.py
-media
+
 
 ### Linux ###
 *~
@@ -209,5 +209,9 @@ ENV/
 
 # mkdocs documentation
 /site
+
+
+*.sqlite3
+
 
 # End of https://www.gitignore.io/api/macos,linux,django,python,pycharm
